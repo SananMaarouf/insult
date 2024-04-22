@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Inter } from "next/font/google";
-
+import { motion } from "framer-motion"
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [inputValue, setInputValue] = useState("");
   const [insultifiedValue, setInsultifiedValue] = useState("");
+  const [copySuccess, setCopySuccess] = useState(false);
 
   function insultify() {
     setInsultifiedValue(alternateCapitalize(inputValue));
@@ -19,11 +20,16 @@ export default function Home() {
   function clear() {
     setInputValue("");
     setInsultifiedValue("");
+    setCopySuccess(false);
   }
 
   function copy() {
-    navigator.clipboard.writeText(insultifiedValue);
-  }
+  navigator.clipboard.writeText(insultifiedValue);
+  setCopySuccess(true);
+  setTimeout(() => {
+    setCopySuccess(false);
+  }, 2000);
+}
   return (
     <main className={`flex min-h-screen flex-col items-center justify-between ${inter.className}`}>
       <div className="w-full h-screen flex items-center  bg-gray-800">
@@ -48,7 +54,21 @@ export default function Home() {
           </section>
           <button
             onClick={copy}
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-2">Copy to Clipboard</button>
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-2">
+            Copy to Clipboard
+          </button>
+          {copySuccess &&
+            <motion.div
+              initial={{ opacity: 0, y: -30,}}
+              animate={{ opacity: 1, y: 0, }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-green-500">
+              <div class="border border-t-0 border-green-300 rounded-b bg-green-100 px-4 py-3 text-green-800">
+                <p>Copied to clipboard</p>
+              </div>
+            </motion.div>
+          }
         </div>
       </div>
     </main>
