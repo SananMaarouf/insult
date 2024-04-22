@@ -31,9 +31,9 @@ export default function Home() {
   }, 2000);
 }
   return (
-    <main className={`flex min-h-screen flex-col items-center justify-between ${inter.className}`}>
+    <main className={`${inter.className}`}>
       <div className="w-full h-screen flex items-center  bg-gray-800">
-        <div className="mx-auto md:w-1/2 text-center flex flex-col text-white">
+        <div className="mx-auto md:w-3/4 max-w-screen-md text-center flex flex-col text-white">
           <h1 className="text-3xl font-bold underline mb-2">Insultifier</h1>
           <input
             className="border-2 text-black border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
@@ -41,13 +41,15 @@ export default function Home() {
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Enter a word or phrase to insultify"
           />
+          <div className="flex flex-col gap-0 md:gap-2 md:flex-row w-full">
           <button onClick={insultify}
-            className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
             Insultify!
           </button>
-          <button onClick={clear} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-2">
+          <button onClick={clear} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-2 w-full">
             Clear
           </button>
+              </div>
           <h2 className="text-2xl font-bold underline my-2">Insultified word or phrase:</h2>
           <section className="bg-gray-300 rounded-md min-h-20 text-left p-2 text-black">
             {insultifiedValue}
