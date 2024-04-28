@@ -14,7 +14,11 @@ export default function Home() {
   }
 
   function alternateCapitalize(s) {
-    return s.split('').map((c, i) => i % 2 == 0 ? c.toUpperCase() : c.toLowerCase()).join('');
+    let chars = s.split('');
+    if (chars[0] === chars[0].toUpperCase()) {
+      chars[0] = chars[0].toLowerCase();
+    }
+    return chars.map((c, i) => i % 2 !== 0 ? c.toUpperCase() : c.toLowerCase()).join('');
   }
 
   function clear() {
@@ -24,12 +28,12 @@ export default function Home() {
   }
 
   function copy() {
-  navigator.clipboard.writeText(insultifiedValue);
-  setCopySuccess(true);
-  setTimeout(() => {
-    setCopySuccess(false);
-  }, 2000);
-}
+    navigator.clipboard.writeText(insultifiedValue);
+    setCopySuccess(true);
+    setTimeout(() => {
+      setCopySuccess(false);
+    }, 2000);
+  }
   return (
     <main className={`${inter.className}`}>
       <div className="w-full h-screen flex items-center  bg-gray-800">
@@ -42,14 +46,14 @@ export default function Home() {
             placeholder="Enter a word or phrase to insultify"
           />
           <div className="flex flex-col gap-0 md:gap-2 md:flex-row w-full">
-          <button onClick={insultify}
-            className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
-            Insultify!
-          </button>
-          <button onClick={clear} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-2 w-full">
-            Clear
-          </button>
-              </div>
+            <button onClick={insultify}
+              className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+              Insultify!
+            </button>
+            <button onClick={clear} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-2 w-full">
+              Clear
+            </button>
+          </div>
           <h2 className="text-2xl font-bold underline my-2">Insultified word or phrase:</h2>
           <section className="bg-gray-300 rounded-md min-h-20 text-left p-2 text-black">
             {insultifiedValue}
@@ -61,7 +65,7 @@ export default function Home() {
           </button>
           {copySuccess &&
             <motion.div
-              initial={{ opacity: 0, y: -30,}}
+              initial={{ opacity: 0, y: -30, }}
               animate={{ opacity: 1, y: 0, }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
