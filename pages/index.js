@@ -38,6 +38,14 @@ export default function Home() {
     <main className={`${inter.className}`}>
       <div className="w-full h-screen flex items-center  bg-gray-800">
         <div className="mx-auto md:w-3/4 max-w-screen-md text-center flex flex-col text-white">
+          <Image 
+            src="/spongebob.jpg"
+            loading="lazy" 
+            alt="Spongebob making fun" 
+            width={300} 
+            height={300} 
+            className="rounded-md mx-auto mb-10"
+          />
           <h1 className="text-3xl font-bold underline mb-2">Insultifier</h1>
           <input
             className="border-2 text-black border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
